@@ -1,8 +1,8 @@
 cask "logi-options-plus" do
-  version "1.68.542186"
+  version "1.60.495862"
   sha256 :no_check
 
-  url "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer.zip",
+  url "https://download01.logi.com/web/ftp/pub/techsupport/optionsplus/logioptionsplus_installer_1.60.495862.zip",
       verified: "download01.logi.com/web/ftp/pub/techsupport/optionsplus/"
   name "Logitech Options+"
   desc "Software for Logitech devices"

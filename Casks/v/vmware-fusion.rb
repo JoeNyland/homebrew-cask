@@ -1,6 +1,6 @@
 cask "vmware-fusion" do
-  version "13.6.3,24585314"
-  sha256 "0415fc9c995ef959f3905bbd97d4560e6701856d2293b44aed1d9aa23a3b7c41"
+  version "13.5.2,23775688"
+  sha256 "4d470e2160acb5da7d52d478f6ef12829c5ebe3c04e3154652466ba0bfeed3f6"
 
   url "https://softwareupdate.vmware.com/cds/vmw-desktop/fusion/#{version.csv.first}/#{version.csv.second}/universal/core/com.vmware.fusion.zip.tar"
   name "VMware Fusion"
@@ -10,19 +10,14 @@ cask "vmware-fusion" do
   livecheck do
     url "https://softwareupdate.vmware.com/cds/vmw-desktop/fusion-universal.xml"
     regex(%r{fusion/(\d+(?:\.\d+)+/\d+)}i)
-    strategy :xml do |xml, regex|
-      xml.get_elements("//url").map do |item|
-        match = item.text&.strip&.match(regex)
-        next if match.blank?
-
-        match[1].tr("/", ",")
-      end
+    strategy :page_match do |page, regex|
+      page.scan(regex).map { |match| match&.first&.tr("/", ",") }
     end
   end
 
   auto_updates true
   conflicts_with cask: "vmware-fusion@preview"
-  depends_on macos: ">= :ventura"
+  depends_on macos: ">= :monterey"
   container nested: "com.vmware.fusion.zip"
 
   app "#{staged_path}/payload/VMware Fusion.app"
@@ -34,7 +29,6 @@ cask "vmware-fusion" do
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-natd"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-netifup"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmnet-sniffer"
-  binary "#{appdir}/VMware Fusion.app/Contents/Library/vmcli"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrest"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmrun"
   binary "#{appdir}/VMware Fusion.app/Contents/Library/vmss2core"
@@ -56,9 +50,8 @@ cask "vmware-fusion" do
 
   postflight do
     system_command "#{appdir}/VMware Fusion.app/Contents/Library/Initialize VMware Fusion.tool",
-                   args:         ["set"],
-                   sudo:         true,
-                   sudo_as_root: true
+                   args: ["set"],
+                   sudo: true
   end
 
   uninstall_preflight do

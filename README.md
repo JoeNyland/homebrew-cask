@@ -1,5 +1,7 @@
 # Homebrew Cask
 
+> This is a fork of Homebrew Cask created at the point when support for macOS Monterey (12) was removed.
+
 _“To install, drag this icon…” no more!_
 
 Homebrew Cask extends [Homebrew](https://brew.sh) and brings its elegance, simplicity, and speed to the installation and management of GUI macOS applications such as Visual Studio Code and Google Chrome.

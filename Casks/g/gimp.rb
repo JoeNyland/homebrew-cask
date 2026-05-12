@@ -11,9 +11,9 @@ cask "gimp" do
     end
   end
   on_big_sur :or_newer do
-    version "3.0.8,1"
-    sha256 arm:   "da83a0ae4c6d50abcbecb821a3cc43f75902572df1b7549700c9fab10f73d16d",
-           intel: "52b562091cffc8e935fc6c30738f04867a5c270ae8f0753bfde05d7564c22759"
+    version "3.2.4"
+    sha256 arm:   "294c016dca7795999129a38b462f80fac3c13cb963e6de9d04eeb5d6e519392b",
+           intel: "85214a388687718d30169d88b22794d6b0a89849bcc7aa456f4afb83c1326be8"
 
     livecheck do
       url "https://www.gimp.org/gimp_versions.json"
